@@ -1,0 +1,18 @@
+{
+  "name": "nodeteamsprowler",
+  "version": "1.0.0",
+  "description": "Searches new versions of Teams for Mac",
+  "main": "TeamsProwler.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Max Sanna",
+  "license": "ISC",
+  "dependencies": {
+    "alphanum-sort": "^1.0.2",
+    "nodejs-file-downloader": "^4.7.1",
+    "url-exist": "^3.0.0",
+    "yargs": "^17.0.1"
+  }
+}
