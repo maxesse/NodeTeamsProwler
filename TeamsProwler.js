@@ -14,6 +14,7 @@ const options = yarg.usage("Usage: -o <win32/win64/macos> -m <Major Teams versio
     .option("c", { alias: "count", describe: "Builds to search for (i.e. 100)", type: "string", demandOption: true})
     .argv
 
+var isWin = process.platform === "win32"
 const majorVersion = options.majorversion
 const build = options.build
 const count = options.count
@@ -41,7 +42,11 @@ var promise1 = Promise.all(versionsToCheck.map(async url => {
 }))
 
 promise1.then(() => {
-    var downloadDirectory = os.homedir() + "/Downloads"
+    if (isWin) {
+        var downloadDirectory = os.homedir() + "\\Downloads"
+    } else {
+        var downloadDirectory = os.homedir() + "/Downloads"
+    }
     existingVersions = sort(existingVersions)
     console.log(`Downloading version ${existingVersions.slice(-1).pop()}`)
     const downloader = new Downloader({     
