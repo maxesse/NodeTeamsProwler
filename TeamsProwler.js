@@ -41,25 +41,30 @@ var promise1 = Promise.all(versionsToCheck.map(async url => {
     }
 }))
 
-promise1.then(() => {
-    if (isWin) {
-        var downloadDirectory = os.homedir() + "\\Downloads"
-    } else {
-        var downloadDirectory = os.homedir() + "/Downloads"
-    }
-    existingVersions = sort(existingVersions)
-    console.log(`Downloading version ${existingVersions.slice(-1).pop()}`)
-    const downloader = new Downloader({     
-    url: existingVersions.slice(-1).pop(),     
-    directory: downloadDirectory,//Sub directories will also be automatically created if they do not exist.    
-    })    
-    
-    try {
-    downloader.download();   
-    } catch (error) {
-    console.log(error)
-    }
-})
+if (existingVersions.count > 0) {
+    promise1.then(() => {
+        if (isWin) {
+            var downloadDirectory = os.homedir() + "\\Downloads"
+        } else {
+            var downloadDirectory = os.homedir() + "/Downloads"
+        }
+        existingVersions = sort(existingVersions)
+        console.log(`Downloading version ${existingVersions.slice(-1).pop()}`)
+        const downloader = new Downloader({     
+        url: existingVersions.slice(-1).pop(),     
+        directory: downloadDirectory,//Sub directories will also be automatically created if they do not exist.    
+        })    
+        
+        try {
+        downloader.download();   
+        } catch (error) {
+        console.log(error)
+        }
+    })
+} else {
+    console.log("We couldn't find any build to download within the specified parameters.")
+}
+
 
 function onErr(err) {
     console.log(err)
