@@ -48,7 +48,7 @@ promise1.then(() => {
         var downloadDirectory = os.homedir() + "/Downloads"
     }
     existingVersions = sort(existingVersions)
-    if (existingVersions.count > 0) {
+    if (existingVersions.length) {
         console.log(`Downloading version ${existingVersions.slice(-1).pop()}`)
         const downloader = new Downloader({     
         url: existingVersions.slice(-1).pop(),     
